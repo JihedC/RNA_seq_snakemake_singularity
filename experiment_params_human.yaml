@@ -1,0 +1,29 @@
+---
+GENOME_ZIP_FASTA_URL: ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_29/GRCh38.primary_assembly.genome.fa.gz
+GENOME_ZIP_GFF_URL: ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_29/gencode.v29.annotation.gff.gz
+GENOME_ZIP_GTF_URL: ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_29/gencode.v29.annotation.gtf.gz
+REPCLASSES_ZIP_bed_URL: annotation/hg38.rm.bed.gz
+REPCLASSES_ZIP_TABLE_URL: annotation/hg38.rm.table.gz
+genome: GRCh38
+analysisDir: myAnalysis
+contrasts: 
+  mutant_vs_control: 
+    - mutant
+    - control
+centrifuge:
+  index: p+h+v
+  url: ftp://ftp.ccb.jhu.edu/pub/infphilo/centrifuge/data/p+h+v.tar.gz
+reference: 
+  index: reference/hg38
+  annotation: annotation/hg38
+samples: samples.tsv
+sraDatabase: "$HOME/ncbi/public/sra"
+threads: 4
+adapter5: AGATCGGAAGAG
+adapter3: AGATCGGAAGAG
+stranded: "no"
+preprocess: "no"
+multipleMapping: "no"
+deseq2: "yes"
+DEXSEQ: "yes"
+repetitiveAnalysis: "yes"
