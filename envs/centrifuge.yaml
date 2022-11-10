@@ -1,0 +1,7 @@
+ 
+channels:
+ - bioconda
+
+dependencies:
+ - centrifuge = 1.0.3
+ - krona = 2.7.0

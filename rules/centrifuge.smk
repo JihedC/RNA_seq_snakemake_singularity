@@ -5,6 +5,7 @@ rule getIndex:
 		"../envs/centrifuge.yaml"
 	params:
 		url=config["centrifuge"]["url"],outputfile="reference/centrifuge/{indexname}.tar.gz".format(indexname=config["centrifuge"]["index"])
+	singularity:'docker://nanozoo/centrifuge:v1.0.4-beta--fab181c'	
 	shell:
 		"""
 		wget -q -O {params.outputfile} {params.url}
@@ -19,6 +20,7 @@ rule centrifuge_PE:
 	output:
 		report="analysis/results/centrifuge/{sample}_report.txt",
 		classification="analysis/results/centrifuge/{sample}_classification.txt"
+	singularity:'docker://nanozoo/centrifuge:v1.0.4-beta--fab181c'	
 	conda:
 		"../envs/centrifuge.yaml"
 	threads:
@@ -35,6 +37,7 @@ rule updateTaxonomy:
 		"reference/centrifuge/taxonomy.tab"
 	conda:
 		"../envs/centrifuge.yaml"
+	singularity:'docker://nanozoo/centrifuge:v1.0.4-beta--fab181c'	
 	shell:
 		"""
 		ktUpdateTaxonomy.sh reference/centrifuge
@@ -48,6 +51,7 @@ rule plotKrona:
 		"analysis/results/krona/report.html"
 	log:
 		"analysis/log/centrifuge/krona.log"
+	singularity:'docker://nanozoo/centrifuge:v1.0.4-beta--fab181c'	
 	conda:
 		"../envs/centrifuge.yaml"
 	shell:

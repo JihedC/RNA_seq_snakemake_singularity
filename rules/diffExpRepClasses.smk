@@ -13,6 +13,7 @@ rule createCountsPerRepetitiveRegions:
 		"analysis/counts/all.countsPerRepetitiveRegions.csv"
 	params:
 		header="chr\\\tstart\\\tend\\\tID\\\t\\\tsize\\\tstrand\\\t"+"\\\t".join(samples)
+	singularity:'docker://biocontainers/bedtools:v2.27.1dfsg-4-deb_cv1'	
 	shell:
 		"""
 		echo {params.header}>{output}

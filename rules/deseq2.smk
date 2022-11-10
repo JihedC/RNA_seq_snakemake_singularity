@@ -18,6 +18,7 @@ rule count_htseq_multi:
 		annotation="{annotationDir}/annotation.gff".format(annotationDir=config["reference"]["annotation"])
 	output:
 		"analysis/counts/all.tsv"
+	singularity:'docker://biocontainers/htseq:v0.11.2-1-deb-py3_cv1'
 	conda:
 		"../envs/htseq.yaml"
 	params:
@@ -45,6 +46,7 @@ rule diffExpresionGene:
 		contrast1="{condition1}",contrast2="{condition2}"
 	log:
 		"analysis/log/{condition1}vs{condition2}.diffexp.log"
+	singularity:'docker://nanozoo/deseq2:1.34.0--c670fa0'	
 	conda:
 		"../envs/R.yaml"
 	script:

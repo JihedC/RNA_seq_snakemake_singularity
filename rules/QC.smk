@@ -13,6 +13,7 @@ rule fastqc_dataDir:
 	params:
 		dir="analysis/QC/dataDir",
 		dirInput="analysis/dataDir"
+	singularity:"docker://biocontainers/fastqc:v0.11.9_cv8"	
 	conda:
 		"envs/fastqc.yaml"
 	shell:
@@ -26,6 +27,7 @@ rule fastqc_filteredDataDir:
 	params:
 		dir="analysis/QC/filteredDataDir",
 		dirInput="analysis/filteredDataDir"
+	singularity:"docker://biocontainers/fastqc:v0.11.9_cv8"		
 	conda:
 		"envs/fastqc.yaml"
 	shell:
@@ -39,6 +41,7 @@ rule fastqc_finalDataDir:
 		dirInput="analysis/finalDataDir"
 	output:
 		touch("analysis/QC/finalDataDir/fastqc.DONE")
+	singularity:"docker://biocontainers/fastqc:v0.11.9_cv8"	
 	conda:
 		"envs/fastqc.yaml"
 	shell:
@@ -52,6 +55,7 @@ rule picardMetrics:
 		touch("analysis/QC/{sample}_stats.DONE")
 	params:
 		dir="analysis/QC/{sample}"
+	singularity:"docker://biocontainers/picard-tools:v2.18.25dfsg-2-deb_cv1"
 	conda:
 		"envs/picard.yaml"
 	shell:
@@ -65,6 +69,7 @@ rule idxstats:
 		BAI="analysis/mappedDataDir/{sample}/{sample}Aligned.sortedByCoord.out.bam.bai"
 	output:
 		"analysis/QC/{sample}.idxstats.txt"
+	singularity:"docker://biocontainers/samtools:v1.9-4-deb_cv1"	
 	shell:
 		"""
 		samtools idxstats {input.BAM} >{output}
@@ -76,6 +81,7 @@ rule deduplicatedStats:
 	output:
 		BAM="analysis/mappedDataDir/{sample}/{sample}.dedup.bam",
 		STATS="analysis/QC/{sample}.dedup.stats"
+	singularity:"docker://biocontainers/picard-tools:v2.18.25dfsg-2-deb_cv1"	
 	shell:
 		"""
 		picard MarkDuplicates VALIDATION_STRINGENCY=SILENT I={input} O={output.BAM} M={output.STATS}
@@ -117,6 +123,7 @@ rule RNAmetrics:
 		"analysis/QC/{sample}.RNAstats.txt"
 	params:
 		 STRAND="NONE"
+	singularity:"docker://zavolab/rnaseqc:2.3.5" 
 	shell:
 		"""
 		rnaseqc {input} {output}
@@ -134,6 +141,7 @@ rule makereport:
 
 	output:
 		"analysis/results/report/multiqc_report.html"
+	singularity:'docker://ewels/multiqc:v1.13'
 	conda:
 		"envs/multiqc.yaml"		
 	shell:

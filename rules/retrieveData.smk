@@ -13,6 +13,7 @@ rule downloadData:
 	output:
 		touch("analysis/download/{sample}.DONE")
 	log: "analysis/originalDataDir/{sample}.download.log"
+	singularity:'docker://hnh0303/sratools:2.10.0'
 	conda:
 		"../envs/sratools.yaml"
 	shell:
@@ -33,6 +34,7 @@ rule sra2fastqAlt:
 	input: "analysis/download/{sample}.sra"
 	output: dynamic("analysis/originalDataDir/{sample}_{READ}.fastq.gz")
 	params: sampleName="{sample}", outdir="analysis/originalDataDir"
+	singularity:'docker://hnh0303/sratools:2.10.0'
 	conda:
 		"../envs/sratools.yaml"
 	shell:
