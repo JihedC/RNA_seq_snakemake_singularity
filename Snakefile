@@ -61,7 +61,7 @@ def getComparisonNames(conditions):
             x.append("analysis/results/DEXSEQ/{condition1}vs{condition2}.figures.pdf".format(condition1=elem1,condition2=elem2))
         if config["repetitiveAnalysis"]=="yes":
             x.append("analysis/results/repClasses/{condition1}vs{condition2}.repClasses.csv".format(condition1=elem1,condition2=elem2))
-                    x.append("analysis/results/repClasses/{condition1}vs{condition2}.figures.repClasses.pdf".format(condition1=elem1,condition2=elem2))
+            x.append("analysis/results/repClasses/{condition1}vs{condition2}.figures.repClasses.pdf".format(condition1=elem1,condition2=elem2))
         if config["QC"]=="yes":
             x.append("analysis/results/report/multiqc_report.html")
     return x

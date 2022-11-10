@@ -14,7 +14,7 @@ rule fastqc_dataDir:
 		dir="analysis/QC/dataDir",
 		dirInput="analysis/dataDir"
 	conda:
-		"../envs/fastqc.yaml"
+		"envs/fastqc.yaml"
 	shell:
 		"fastqc -o {params.dir} {params.dirInput}/*gz"
 
@@ -27,7 +27,7 @@ rule fastqc_filteredDataDir:
 		dir="analysis/QC/filteredDataDir",
 		dirInput="analysis/filteredDataDir"
 	conda:
-		"../envs/fastqc.yaml"
+		"envs/fastqc.yaml"
 	shell:
 		"fastqc -o {params.dir} {params.dirInput}/*gz"
 
@@ -40,7 +40,7 @@ rule fastqc_finalDataDir:
 	output:
 		touch("analysis/QC/finalDataDir/fastqc.DONE")
 	conda:
-		"../envs/fastqc.yaml"
+		"envs/fastqc.yaml"
 	shell:
 		"fastqc -o {params.dir} {params.dirInput}/*gz"
 
@@ -53,7 +53,7 @@ rule picardMetrics:
 	params:
 		dir="analysis/QC/{sample}"
 	conda:
-		"../envs/picard.yaml"
+		"envs/picard.yaml"
 	shell:
 		"""
 		picard CollectMultipleMetrics VALIDATION_STRINGENCY=SILENT I={input.BAM} R={input.reference} O={params.dir}
@@ -135,6 +135,6 @@ rule makereport:
 	output:
 		"analysis/results/report/multiqc_report.html"
 	conda:
-		"../envs/multiqc.yaml"		
+		"envs/multiqc.yaml"		
 	shell:
 		"multiqc -o analysis/results/report analysis"
