@@ -47,8 +47,7 @@ rule mapping:
 		8
 	log:
 		"analysis/log/mapping/{sample}.log"
-	singularity:
-        "docker://mgibio/star:latest"	
+	singularity:"docker://mgibio/star:latest"
 	conda:
 		"../envs/STAR.yaml"
 	output:
@@ -72,8 +71,7 @@ rule getNormalizedCoverage:
 		BAI="analysis/mappedDataDir/{sample}/{sample}Aligned.sortedByCoord.out.bam.bai"
 	output:
 		"analysis/toUCSC_norm/{sample}.normalized.bw"
-	singularity:
-        "docker://stjudecloud/deeptools:branch-chipseq-1.0.2"	
+	singularity:"docker://stjudecloud/deeptools:branch-chipseq-1.0.2"
 	conda:
 		"../envs/deeptools.yaml"
 	params: norm="norm"
@@ -88,8 +86,7 @@ rule getCoverage:
 		BAI="analysis/mappedDataDir/{sample}/{sample}Aligned.sortedByCoord.out.bam.bai"
 	output:
 		"analysis/toUCSC/{sample}.bw"
-	singularity:
-        "docker://stjudecloud/deeptools:branch-chipseq-1.0.2"	
+	singularity:"docker://stjudecloud/deeptools:branch-chipseq-1.0.2"
 	conda:
 		"../envs/deeptools.yaml"
 	shell:
